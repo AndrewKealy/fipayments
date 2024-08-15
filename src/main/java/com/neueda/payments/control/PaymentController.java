@@ -3,12 +3,9 @@ package com.neueda.payments.control;
 import com.neueda.payments.exceptions.PaymentNotFoundException;
 import com.neueda.payments.model.Payment;
 import com.neueda.payments.service.PaymentsService;
-import com.neueda.payments.service.PaymentsServiceImpl;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @CrossOrigin

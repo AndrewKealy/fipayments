@@ -1,8 +1,6 @@
 package com.neueda.payments;
 
 import com.neueda.payments.model.Payment;
-import com.neueda.payments.repositories.PaymentsRepository;
-import net.bytebuddy.dynamic.DynamicType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

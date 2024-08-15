@@ -18,7 +18,7 @@ public class ServiceLoggingAspect {
     Logger logger = LoggerFactory.getLogger(ServiceLoggingAspect.class);
 
     @Pointcut("execution(* com.neueda.payments.service.*.* (..))")
-    public void logServiceMethods() {};
+    public void logServiceMethods() {}
 
     @Before("logServiceMethods()")
     public void beforeLogServiceMethods(JoinPoint joinPoint) {
