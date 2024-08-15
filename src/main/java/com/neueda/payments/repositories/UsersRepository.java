@@ -1,14 +1,11 @@
 package com.neueda.payments.repositories;
 
-import com.neueda.payments.model.Payment;
-import org.springframework.data.jpa.repository.*;
-import org.springframework.stereotype.*;
-
-import java.util.*;
+import com.neueda.payments.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PaymentsRepository extends JpaRepository<Payment, Long> {
+public interface UsersRepository extends JpaRepository<User, Long> {
 
-    List<Payment> findAllByCountry(String country);
-    List<Payment> findAllByOrderId(String orderId);
+
 }

@@ -1,6 +1,6 @@
 package com.neueda.payments.model;
 
-public enum Role {
+public enum UserRole {
     USER,
     ADMIN
 }

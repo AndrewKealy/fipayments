@@ -1,8 +1,10 @@
 package com.neueda.payments.service;
 
+import com.neueda.payments.exceptions.PaymentNotFoundException;
 import com.neueda.payments.model.Payment;
 import com.neueda.payments.repositories.PaymentsRepository;
-import org.springframework.beans.factory.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.*;
 
 import java.util.*;
@@ -10,7 +12,9 @@ import java.util.*;
 @Service
 public class PaymentsServiceImpl implements PaymentsService {
 
-    private PaymentsRepository paymentsRepository;
+    private final Logger logger = LoggerFactory.getLogger(PaymentsServiceImpl.class);
+
+    private final PaymentsRepository paymentsRepository;
 
     public PaymentsServiceImpl(PaymentsRepository paymentsRepository) {
         this.paymentsRepository = paymentsRepository;
@@ -29,8 +33,25 @@ public class PaymentsServiceImpl implements PaymentsService {
     }
 
     @Override
-    public Payment getPaymentById(Long id) {
-        return paymentsRepository.findById(id).orElse(null);
+    public Payment getPaymentById(Long id) throws PaymentNotFoundException {
+        return paymentsRepository.findById(id).orElseThrow( () ->
+             new PaymentNotFoundException("No Payment found for id " + id)
+        );
     }
 
+    @Override
+    public List<Payment> getAllByCountry(String country) {
+        logger.info("Getting all payments for country {}", country);
+        return paymentsRepository.findAllByCountry(country);
+    }
+
+    @Override
+    public List<Payment> getAllByOrderId(String orderId) {
+        return paymentsRepository.findAllByOrderId(orderId);
+    }
+
+    @Override
+    public List<String> getAllCountries() {
+        return paymentsRepository.findAll().stream().map(Payment::getCountry).distinct().sorted().toList();
+    }
 }

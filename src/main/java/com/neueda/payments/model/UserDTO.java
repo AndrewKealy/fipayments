@@ -1,7 +1,4 @@
-package com.neueda.payments.dto;
-
-import com.neueda.payments.enums.UserRole;
-import com.neueda.payments.model.User;
+package com.neueda.payments.model;
 
 public class UserDTO {
 
@@ -43,7 +40,7 @@ public class UserDTO {
         return role;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public void setRole(UserRole userRole) {
+        this.role = userRole;
     }
 }

@@ -1,45 +1,37 @@
 package com.neueda.payments.control;
 
-import com.neueda.payments.exceptions.PaymentNotFoundException;
-import com.neueda.payments.model.Payment;
-import com.neueda.payments.service.PaymentsService;
-import com.neueda.payments.service.PaymentsServiceImpl;
+import com.neueda.payments.exceptions.UserNotFoundException;
+import com.neueda.payments.model.User;
+import com.neueda.payments.model.UserDTO;
+import com.neueda.payments.service.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/payment")
-public class PaymentController {
+@RequestMapping("api/user")
+public class UserController {
 
-    private final PaymentsService paymentsService;
+    private final UserService userService;
 
-    public PaymentController(PaymentsService paymentsService) {
-        this.paymentsService = paymentsService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping
-    public List<Payment> retrieveAllPayments(@RequestParam(value = "country", required = false) String country,
-                                             @RequestParam(value = "orderId", required = false) String orderId) {
-        if (country != null) {
-            return paymentsService.getAllByCountry(country);
-        } else if (orderId != null) {
-            return paymentsService.getAllByOrderId(orderId);
-        } else {
-            return paymentsService.getAllPayments();
+    public List<UserDTO> retrieveAllUsers() {
+            return userService.getAllUsers().stream().map(UserDTO::new).toList();
         }
-    }
 
     @GetMapping(value = "/{id}", produces =  {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public Payment getPaymentById(@PathVariable("id") Long id) throws PaymentNotFoundException {
-        return  paymentsService.getPaymentById(id);
+    public UserDTO getUserById(@PathVariable("id") Long id) throws UserNotFoundException {
+        return new UserDTO(userService.getUserById(id));
     }
 
     @PostMapping
-    public Payment createNewPayment(@RequestBody Payment newPayment) {
-        return paymentsService.save(newPayment);
+    public User createNewUser(@RequestBody User newUser) {
+        return userService.save(newUser);
     }
 }

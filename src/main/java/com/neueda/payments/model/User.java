@@ -1,33 +1,19 @@
 package com.neueda.payments.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import java.time.*;
+import jakarta.persistence.*;
 
 @Entity
-public class Payment {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double amount;
-    private String country;
-    private String currency;
-    private LocalDate date;
+    private String name;
+    @Column(name = "role")
+    private UserRole userRole;
+    private String password;
 
-    //@Column(name = "order_id")
-    private String orderId;
-
-    //@Column(name = "tax_code")
-    private Integer taxCode;
-
-    //@Column(name = "tax_rate")
-    private Double taxRate;
-    private String type;
-
-    public Payment() {}
+    public User() {};
 
     public Long getId() {
         return id;
@@ -37,82 +23,36 @@ public class Payment {
         this.id = id;
     }
 
-    public Double getAmount() {
-        return amount;
+    public String getName() {
+        return name;
     }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCountry() {
-        return country;
+    public UserRole getRole() {
+        return userRole;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
-    public String getCurrency() {
-        return currency;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public Integer getTaxCode() {
-        return taxCode;
-    }
-
-    public void setTaxCode(Integer taxCode) {
-        this.taxCode = taxCode;
-    }
-
-    public Double getTaxRate() {
-        return taxRate;
-    }
-
-    public void setTaxRate(Double taxRate) {
-        this.taxRate = taxRate;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
-        return "ccTransaction{" +
-                "id=" + id +
-                ", amount=" + amount +
-                ", country='" + country + '\'' +
-                ", currency='" + currency + '\'' +
-                ", date=" + date +
-                ", orderId='" + orderId + '\'' +
-                ", taxCode=" + taxCode +
-                ", taxRate=" + taxRate +
-                ", type='" + type + '\'' +
+        return "User{" +
+                "name='" + name + '\'' +
+                ", role=" + userRole +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

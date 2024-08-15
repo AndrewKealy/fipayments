@@ -1,20 +1,15 @@
 package com.neueda.payments.service;
 
-import com.neueda.payments.exceptions.PaymentNotFoundException;
-import com.neueda.payments.model.Payment;
-import org.springframework.stereotype.Service;
+import com.neueda.payments.exceptions.UserNotFoundException;
+import com.neueda.payments.model.User;
 
-import java.util.*;
+import java.util.List;
 
-public interface PaymentsService {
+public interface UserService {
 
-    List<Payment> getAllPayments();
+    List<User> getAllUsers();
 
-    Payment getPaymentById(Long id) throws PaymentNotFoundException;
+    User getUserById(Long id) throws UserNotFoundException;
 
-    Payment save(Payment payment);
-
-    List<Payment> getAllByCountry(String country);
-
-    List<Payment> getAllByOrderId(String orderId);
+    User save(User user);
 }
